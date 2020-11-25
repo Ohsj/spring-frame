@@ -1,0 +1,12 @@
+server:
+  port: 5001
+  error:
+    whitelabel:
+      enabled: true
+
+## local
+spring:
+  profiles:
+    active: local
+  main:
+    lazy-initialization: true
