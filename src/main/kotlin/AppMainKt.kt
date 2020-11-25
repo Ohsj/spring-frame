@@ -25,10 +25,12 @@ class AppMainKt {
         fun main(args: Array<String>) {
             val elapsed = measureTimeMillis {
                 log.info("============ AppMain Run START ============")
+                // main start
                 val app = runApplication<AppMainKt>(*args) {
                     setBannerMode(Banner.Mode.OFF)
                 }
 
+                // profile check
                 log.info("============ Check Profile START ============")
                 val env = app.getBean("environment") as Environment
                 env.activeProfiles.toList().forEach { log.info(it) }
