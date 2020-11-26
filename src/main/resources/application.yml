@@ -4,6 +4,14 @@ server:
     whitelabel:
       enabled: true
 
+app:
+  passwordKey: sorkaksemsvmfpdla
+  test: ENC(UuO0zpRB8OcIraFdbu+Pq9Ed+X7H+45Gz4v9mrP8Lu0=)
+
+jasypt:
+  encryptor:
+    bean: encryptorBean
+
 ## local
 spring:
   profiles:
