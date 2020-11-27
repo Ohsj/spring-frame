@@ -1,4 +1,4 @@
-package kr.co.osj4532.kr.co.osj4532.util
+package kr.co.osj4532.util
 
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig
