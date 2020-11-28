@@ -39,7 +39,11 @@ dependencies {
     // kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
+    //jasypt
+    implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3"
+
     // test
+    testCompile "org.springframework.boot:spring-boot-starter-test"
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
