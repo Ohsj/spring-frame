@@ -10,8 +10,6 @@ import org.springframework.test.context.junit4.SpringRunner
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = [AppMainKt::class])
 class EncryptUitlsTest {
 
-//    @Autowired lateinit var encryptUtils: EncryptUtils
-
     @Test
     fun encryptTest() {
         val res = EncryptUtils.encrypt("1234")

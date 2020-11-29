@@ -2,7 +2,7 @@
 buildscript {
     ext {
         // gradle 안에서 전역 변수로 사용 하는 구간
-        springBootVersion = '2.4.0'
+        springBootVersion = '2.1.4.RELEASE'
         kotlinPluginVersion = '1.4.20'
     }
     dependencies {
@@ -38,9 +38,19 @@ dependencies {
 
     // kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin"
 
     //jasypt
     implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3"
+
+    // database
+    implementation "mysql:mysql-connector-java:8.0.22"
+
+    // mybatis
+    implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4"
+
+    // devtools
+    compileOnly "org.springframework.boot:spring-boot-devtools"
 
     // test
     testCompile "org.springframework.boot:spring-boot-starter-test"
@@ -50,12 +60,12 @@ dependencies {
 compileKotlin {
     kotlinOptions{
         freeCompilerArgs = ['-Xjsr305=strict']
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 }
 compileTestKotlin {
     kotlinOptions{
         freeCompilerArgs = ['-Xjsr305=strict']
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 }

@@ -1,8 +1,10 @@
 package kr.co.osj4532.fwk.base
 
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.MediaType
+import org.springframework.transaction.annotation.EnableTransactionManagement
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer
 import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
@@ -13,6 +15,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Configuration
 @ComponentScan(basePackages = ["kr.co.osj4532"], lazyInit = true)
+@EnableTransactionManagement
+@EnableEncryptableProperties
 class BaseConfig : WebMvcConfigurer{
 
     override fun addCorsMappings(registry: CorsRegistry) {
