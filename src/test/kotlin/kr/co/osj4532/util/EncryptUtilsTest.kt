@@ -8,11 +8,11 @@ import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = [AppMainKt::class])
-class EncryptUitlsTest {
+class EncryptUtilsTest {
 
     @Test
     fun encryptTest() {
-        val res = EncryptUtils.encrypt("1234")
+        val res = EncryptUtils.encrypt("jdbc:mysql://localhost:3306/query_study?serverTimezone=Asia/Seoul")
         println(res)
     }
 }

@@ -35,9 +35,9 @@ class MybatisConfig {
         val sqlSessionFactoryBean = SqlSessionFactoryBean()
         sqlSessionFactoryBean.setDataSource(ds)
         sqlSessionFactoryBean.setConfigLocation(pathResolver.getResource("classpath:mybatis/mybatis-config.xml"))
-        sqlSessionFactoryBean.setMapperLocations(pathResolver.getResource("classpath:mybatis/mappers/test-mapper.xml"))
+        sqlSessionFactoryBean.setMapperLocations(*pathResolver.getResources("classpath:mybatis/mappers/*.xml"))
         sqlSessionFactoryBean.vfs = SpringBootVFS::class.java
-        log.info("=============== MybatisConfig End ===============")
+        log.info("=============== MybatisConfig End   ===============")
         return sqlSessionFactoryBean.`object`!!
     }
 

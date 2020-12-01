@@ -14,7 +14,7 @@ jasypt:
 ## local
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/query_study?serverTimezone=Asia/Seoul
+    url: ENC(P+jF6zXb1WaB0RMeCEyYu8IMaWpudtJEF/FoK/Yyta22wnVpEBWl3/8b+P0aemJdU+rzE1ICMbmZw6iLis7ETfn1U/2llgOuD1IEO3oHXQ0=)
     username: ENC(8uziWrf3YlQ3l0Oljwm6dg==)
     password: ENC(Kxq4ZMWnt9+Y/7zPh6VKYQ==)
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -22,11 +22,8 @@ spring:
       auto-commit: false
   profiles:
     active: local
-  main:
-    lazy-initialization: true
   devtools:
+    restart:
+      enabled: true
     livereload:
       enabled: true
-      restart:
-        additional-paths: META-INF/**
-        enabled: true

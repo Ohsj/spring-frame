@@ -24,23 +24,24 @@ class AppMainKt {
         @JvmStatic
         fun main(args: Array<String>) {
             val elapsed = measureTimeMillis {
-                log.info("============ AppMain Run START ============")
+                log.info("============ AppMain Run START       ============")
                 // main start
                 val app = runApplication<AppMainKt>(*args) {
                     setBannerMode(Banner.Mode.OFF)
                 }
 
                 // profile check
-                log.info("============ Check Profile START ============")
+                log.info("============ Check Profile START     ============")
                 val env = app.getBean("environment") as Environment
                 env.activeProfiles.toList().forEach { log.info(it) }
-                log.info("============ Check Profile  END ============ : activate profile count: ${env.activeProfiles.count()}")
+                log.info("============ Check Profile END       ============ : activate profile count: ${env.activeProfiles.count()}")
 
                 log.info("============ Check Loaded Bean START ============")
                 log.info("Loaded Bean : ${app.beanDefinitionNames.toList().sorted().size}")
+                log.info("============ Check Loaded Bean END   ============")
             }
 
-            log.info("============ AppMain Run END ============ : $elapsed ms")
+            log.info("============ AppMain Run END         ============ : $elapsed ms")
         }
     }
 }
