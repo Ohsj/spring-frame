@@ -40,8 +40,11 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation "com.fasterxml.jackson.module:jackson-module-kotlin"
 
-    //jasypt
+    // jasypt
     implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3"
+
+    // swagger
+    implementation "io.springfox:springfox-boot-starter:3.0.0"
 
     // database
     implementation "mysql:mysql-connector-java:8.0.22"
@@ -60,12 +63,12 @@ dependencies {
 compileKotlin {
     kotlinOptions{
         freeCompilerArgs = ['-Xjsr305=strict']
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = JavaVersion.VERSION_13.toString()
     }
 }
 compileTestKotlin {
     kotlinOptions{
         freeCompilerArgs = ['-Xjsr305=strict']
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = JavaVersion.VERSION_13.toString()
     }
 }
