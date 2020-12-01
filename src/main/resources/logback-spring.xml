@@ -154,8 +154,6 @@
     <logger name="org.mybatis" level="error" additivity="true"/>
     <logger name="org.springframework.beans" level="info" additivity="false"/>
     <logger name="org.springframework.data" level="info" additivity="false"/>
-    <logger name="com.amazonaws" level="info" additivity="false"/>
-    <logger name="org.mongodb.driver" level="info" additivity="false"/>
     <logger name="springfox.documentation" level="error"/>
     <logger name="org.hibernate" level="error"/>
     <logger name="de.codecentric.boot.admin.server.services.IntervalCheck" level="info"/>
@@ -185,55 +183,33 @@
        MyBatis Query: Repository 쿼리를 볼 때 DEBUG 이하로 낮춥니다.
      -->
     <springProfile name="local">
-        <logger name="kr.co.rsquare.manage.repo" level="info" additivity="false">
-            <appender-ref ref="appenderSql"/>
-        </logger>
-    </springProfile>
-    <springProfile name="sqlInfo">
-        <logger name="kr.co.rsquare.manage.repo" level="debug" additivity="false">
-            <appender-ref ref="appenderSql"/>
+        <logger name="kr.co.osj4532.repo" level="debug" additivity="false">
+            <appender-ref ref="asyncAppenderSql"/>
         </logger>
     </springProfile>
     <springProfile name="dev">
-        <logger name="kr.co.rsquare.manage.repo" level="debug" additivity="true">
+        <logger name="kr.co.osj4532.repo" level="debug" additivity="false">
             <appender-ref ref="asyncAppenderSql"/>
         </logger>
     </springProfile>
     <springProfile name="prd">
-        <logger name="kr.co.rsquare.manage.repo" level="debug" additivity="false">
+        <logger name="kr.co.osj4532.repo" level="debug" additivity="false">
             <appender-ref ref="asyncAppenderSql"/>
         </logger>
     </springProfile>
-    <logger name="kr.co.rsquare.manage.repo.manage.mybatis.fwk" level="error" additivity="false"/>
+<!--    <logger name="kr.co.rsquare.manage.repo.manage.mybatis.fwk" level="error" additivity="false"/>-->
 
     <!--
-        Redis Log
+        Service Log
     -->
-    <logger name="io.lettuce.core" level="error" additivity="false"/>
-
-    <!--
-        Manage Service Log
-    -->
-    <logger name="kr.co.rsquare.manage.part.sam.service" level="debug" additivity="true"> <appender-ref ref="appenderService"/> </logger>
-    <logger name="kr.co.rsquare.manage.part.com.service" level="debug" additivity="true"> <appender-ref ref="appenderService"/> </logger>
-    <logger name="kr.co.rsquare.manage.part.gtd.service" level="debug" additivity="true"> <appender-ref ref="appenderService"/> </logger>
-    <logger name="kr.co.rsquare.manage.part.mig.service" level="debug" additivity="true"> <appender-ref ref="appenderService"/> </logger>
-    <logger name="kr.co.rsquare.manage.part.obj.service" level="debug" additivity="true"> <appender-ref ref="appenderService"/> </logger>
+    <logger name="kr.co.osj4532.part.service" level="info" additivity="false"> <appender-ref ref="appenderService"/> </logger>
 
     <springProfile name="dev">
-        <logger name="kr.co.rsquare.manage.part.sam.service" level="debug" additivity="false"> <appender-ref ref="appenderService"/> </logger>
-        <logger name="kr.co.rsquare.manage.part.com.service" level="debug" additivity="false"> <appender-ref ref="appenderService"/> </logger>
-        <logger name="kr.co.rsquare.manage.part.gtd.service" level="debug" additivity="false"> <appender-ref ref="appenderService"/> </logger>
-        <logger name="kr.co.rsquare.manage.part.mig.service" level="debug" additivity="false"> <appender-ref ref="appenderService"/> </logger>
-        <logger name="kr.co.rsquare.manage.part.obj.service" level="debug" additivity="false"> <appender-ref ref="appenderService"/> </logger>
+        <logger name="kr.co.osj4532.part.service" level="info" additivity="false"> <appender-ref ref="appenderService"/> </logger>
     </springProfile>
 
     <springProfile name="prd">
-        <logger name="kr.co.rsquare.manage.part.sam.service" level="info" additivity="false"> <appender-ref ref="appenderService"/> </logger>
-        <logger name="kr.co.rsquare.manage.part.com.service" level="info" additivity="false"> <appender-ref ref="appenderService"/> </logger>
-        <logger name="kr.co.rsquare.manage.part.gtd.service" level="info" additivity="false"> <appender-ref ref="appenderService"/> </logger>
-        <logger name="kr.co.rsquare.manage.part.mig.service" level="info" additivity="false"> <appender-ref ref="appenderService"/> </logger>
-        <logger name="kr.co.rsquare.manage.part.obj.service" level="info" additivity="false"> <appender-ref ref="appenderService"/> </logger>
+        <logger name="kr.co.osj4532.part.service" level="info" additivity="false"> <appender-ref ref="appenderService"/> </logger>
     </springProfile>
 
     <!--
