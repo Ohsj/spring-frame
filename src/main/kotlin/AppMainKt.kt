@@ -36,6 +36,7 @@ class AppMainKt {
                 env.activeProfiles.toList().forEach { log.info(it) }
                 log.info("============ Check Profile END       ============ : activate profile count: ${env.activeProfiles.count()}")
 
+                // loaded bean
                 log.info("============ Check Loaded Bean START ============")
                 log.info("Loaded Bean : ${app.beanDefinitionNames.toList().sorted().size}")
                 log.info("============ Check Loaded Bean END   ============")
