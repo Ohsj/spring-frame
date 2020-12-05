@@ -52,6 +52,9 @@ dependencies {
     // mybatis
     implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4"
 
+    // jpa
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+
     // devtools
     compileOnly "org.springframework.boot:spring-boot-devtools"
 
