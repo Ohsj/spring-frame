@@ -25,24 +25,28 @@ import kotlin.jvm.Throws
         sqlSessionTemplateRef = "sqlSessionTemplate"
 )
 class MybatisConfig {
-    private val log = LoggerFactory.getLogger(MybatisConfig::class.java) as Logger
+    companion object {
+        private val log = LoggerFactory.getLogger(MybatisConfig::class.java) as Logger
+    }
 
     @Bean(name = ["sqlSessionFactory"])
     @Throws(IOException::class)
     fun sqlSessionFactory(@Qualifier("dataSource") ds: DataSource) : SqlSessionFactory {
-        log.info("=============== MybatisConfig Start ===============")
+        log.info("MybatisConfig Start")
         val pathResolver = PathMatchingResourcePatternResolver()
         val sqlSessionFactoryBean = SqlSessionFactoryBean()
         sqlSessionFactoryBean.setDataSource(ds)
         sqlSessionFactoryBean.setConfigLocation(pathResolver.getResource("classpath:mybatis/mybatis-config.xml"))
         sqlSessionFactoryBean.setMapperLocations(*pathResolver.getResources("classpath:mybatis/mappers/*.xml"))
         sqlSessionFactoryBean.vfs = SpringBootVFS::class.java
-        log.info("=============== MybatisConfig End   ===============")
+        log.info("MybatisConfig End")
         return sqlSessionFactoryBean.`object`!!
     }
 
     @Bean(name = ["sqlSessionTemplate"])
     fun sqlSessionTemplate(@Qualifier("sqlSessionFactory") sqlSessionFactory: SqlSessionFactory) : SqlSessionTemplate {
+        log.info("SqlSessionTemplate Start")
+        log.info("SqlSessionTemplate End")
         return SqlSessionTemplate(sqlSessionFactory)
     }
 }

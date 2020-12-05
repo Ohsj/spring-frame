@@ -202,8 +202,9 @@
     <!--
         Service Log
     -->
-    <logger name="kr.co.osj4532.part.service" level="info" additivity="false"> <appender-ref ref="appenderService"/> </logger>
-
+    <springProfile name="local">
+        <logger name="kr.co.osj4532.part.service" level="info" additivity="false"> <appender-ref ref="appenderService"/> </logger>
+    </springProfile>
     <springProfile name="dev">
         <logger name="kr.co.osj4532.part.service" level="info" additivity="false"> <appender-ref ref="appenderService"/> </logger>
     </springProfile>

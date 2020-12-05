@@ -1,5 +1,7 @@
 package kr.co.osj4532.fwk.config
 
+import ch.qos.logback.classic.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Lazy
@@ -16,6 +18,10 @@ import springfox.documentation.spring.web.plugins.Docket
 
 @Configuration
 class SwaggerConfig {
+    companion object {
+        private val log = LoggerFactory.getLogger(SwaggerConfig::class.java) as Logger
+    }
+
     private fun apiInfo(): ApiInfo {
         return ApiInfoBuilder()
             .title("Osj4532 Frame")
@@ -27,6 +33,8 @@ class SwaggerConfig {
     @Lazy
     @Bean
     fun api(): Docket {
+        log.info("Swagger Config Start")
+        log.info("Swagger Config End")
         return Docket(DocumentationType.OAS_30)
             .select()
             .apis(RequestHandlerSelectors.basePackage("kr.co.osj4532"))
