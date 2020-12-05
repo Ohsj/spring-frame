@@ -4,8 +4,6 @@ import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import kr.co.osj4532.kr.co.osj4532.part.service.TestService
 import kr.co.osj4532.part.dto.GetTestOut
-import kr.co.osj4532.repo.mybatis.TestMapper
-import kr.co.osj4532.repo.mybatis.TestMapper2
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
