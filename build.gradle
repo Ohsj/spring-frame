@@ -56,6 +56,10 @@ dependencies {
     // jpa
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
 
+    // etc
+    implementation "commons-io:commons-io:2.8.0"
+    implementation "org.apache.commons:commons-lang3:3.9"
+
     // devtools
     compileOnly "org.springframework.boot:spring-boot-devtools"
 

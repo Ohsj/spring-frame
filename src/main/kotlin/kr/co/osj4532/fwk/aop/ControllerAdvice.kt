@@ -1,11 +1,16 @@
 package kr.co.osj4532.fwk.aop
 
 import ch.qos.logback.classic.Logger
+import org.apache.commons.io.IOUtils
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import java.nio.charset.Charset
+import java.util.*
+import javax.servlet.http.HttpServletRequest
 import kotlin.system.measureTimeMillis
 
 
@@ -19,6 +24,8 @@ class ControllerAdvice {
     companion object {
         private val log = LoggerFactory.getLogger(ControllerAdvice::class.java) as Logger
     }
+
+    @Autowired lateinit var request: HttpServletRequest
 
     /**
      * Advice 는 모두 다섯 가지의 타입이 있다.
@@ -42,12 +49,24 @@ class ControllerAdvice {
      */
     @Around("PointCutList.pointController()")
     fun aroundController(joinPoint: ProceedingJoinPoint): Any? {
+        // Init
         val controllerName = "${joinPoint.signature.declaringType.simpleName}.${joinPoint.signature.name}"
         val elapsed: Long
         val returnVal: Any?
 
         // Main
         try{
+            log.info("session ID : ${request.session.id}")
+            log.info("client IP : ${request.getHeader("real-ip")}")
+            log.info("GID : ${UUID.randomUUID()}")
+            log.info("method : ${request.method}")
+            log.info("request URL : ${request.requestURI}")
+            log.info("query String :  ${request.queryString}")
+
+            var body = IOUtils.toString(request.inputStream, Charset.forName("UTF-8"))
+            body = body.replace("\n", "")
+            log.info("body :  $body")
+            log.info("referer :  ${request.getHeader("referer")}")
             log.info(">>>>> controller start [$controllerName()]")
             elapsed = measureTimeMillis {
                 returnVal = joinPoint.proceed()
