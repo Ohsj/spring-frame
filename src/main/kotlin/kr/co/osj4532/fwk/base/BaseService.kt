@@ -5,6 +5,6 @@ import org.slf4j.LoggerFactory
 import org.springframework.transaction.annotation.Transactional
 
 @Transactional
-class BaseController: BaseObject() {
+class BaseService: BaseObject() {
     protected final val log = LoggerFactory.getLogger(this::class.java) as Logger
 }

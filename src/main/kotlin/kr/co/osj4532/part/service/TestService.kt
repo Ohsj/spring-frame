@@ -1,10 +1,12 @@
-package kr.co.osj4532.kr.co.osj4532.part.service
+package kr.co.osj4532.part.service
 
 
+import kr.co.osj4532.fwk.base.BaseService
+import kr.co.osj4532.model.entity.TestMst
 import kr.co.osj4532.part.dto.GetTestOut
+import kr.co.osj4532.repo.jpa.TestMstRepo
 import kr.co.osj4532.repo.mybatis.TestMapper
 import kr.co.osj4532.repo.mybatis.TestMapper2
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 /**
@@ -12,9 +14,11 @@ import org.springframework.stereotype.Service
  */
 
 @Service
-class TestService {
-    @Autowired lateinit var mapper: TestMapper
-    @Autowired lateinit var mapper2: TestMapper2
+class TestService(
+        val mapper: TestMapper,
+        val mapper2: TestMapper2,
+        val testRepo: TestMstRepo
+): BaseService() {
 
     fun mapperTest(): List<GetTestOut> {
         return mapper.selectTest()
@@ -22,5 +26,9 @@ class TestService {
 
     fun mapperTest2(): List<GetTestOut> {
         return mapper2.selectTest()
+    }
+
+    fun jpaTest(): List<TestMst>? {
+        return testRepo.findAll()
     }
 }

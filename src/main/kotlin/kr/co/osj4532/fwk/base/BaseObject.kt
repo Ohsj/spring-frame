@@ -1,4 +1,4 @@
-package kr.co.osj4532.kr.co.osj4532.fwk.base
+package kr.co.osj4532.fwk.base
 
 import ch.qos.logback.classic.Logger
 import org.slf4j.LoggerFactory

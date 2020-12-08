@@ -2,8 +2,9 @@ package kr.co.osj4532.part.controller
 
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
-import kr.co.osj4532.kr.co.osj4532.fwk.base.BaseController
-import kr.co.osj4532.kr.co.osj4532.part.service.TestService
+import kr.co.osj4532.fwk.base.BaseController
+import kr.co.osj4532.part.service.TestService
+import kr.co.osj4532.model.entity.TestMst
 import kr.co.osj4532.part.dto.GetTestOut
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -31,6 +32,10 @@ class TestController : BaseController() {
         log.debug("메퍼2 테스트 API")
         return service.mapperTest2()
     }
+
+    @GetMapping("/jpa")
+    @ApiOperation("Jpa 테스트")
+    fun jpaTest(): List<TestMst>? = service.jpaTest()
 
     @PostMapping
     @ApiOperation("포스트 로깅 테스트 API")
