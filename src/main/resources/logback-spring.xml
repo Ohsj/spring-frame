@@ -156,6 +156,7 @@
     <logger name="org.springframework.data" level="info" additivity="false"/>
     <logger name="springfox.documentation" level="error"/>
     <logger name="org.hibernate" level="error"/>
+    <logger name="com.querydsl" additivity="false"/>
     <logger name="de.codecentric.boot.admin.server.services.IntervalCheck" level="info"/>
     <logger name="javax.management" level="info"/>
     <logger name="org.hibernate.hql.internal.QueryTranslatorFactoryInitiator" level="error"/>

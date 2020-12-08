@@ -46,7 +46,8 @@ class MybatisConfig {
     @Bean(name = ["sqlSessionTemplate"])
     fun sqlSessionTemplate(@Qualifier("sqlSessionFactory") sqlSessionFactory: SqlSessionFactory) : SqlSessionTemplate {
         log.info("SqlSessionTemplate Start")
+        val res = SqlSessionTemplate(sqlSessionFactory)
         log.info("SqlSessionTemplate End")
-        return SqlSessionTemplate(sqlSessionFactory)
+        return res
     }
 }

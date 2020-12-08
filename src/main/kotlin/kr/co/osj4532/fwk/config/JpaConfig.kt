@@ -60,7 +60,8 @@ class JpaConfig {
     @Bean(name = ["transactionManager"])
     fun transactionManager(@Qualifier("entityManagerFactory") entityManagerFactory: EntityManagerFactory): JpaTransactionManager {
         log.info("TransactionManager Start")
+        val res = JpaTransactionManager(entityManagerFactory)
         log.info("TransactionManager End")
-        return JpaTransactionManager(entityManagerFactory)
+        return res
     }
 }

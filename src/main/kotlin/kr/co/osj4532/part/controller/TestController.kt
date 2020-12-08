@@ -37,6 +37,10 @@ class TestController : BaseController() {
     @ApiOperation("Jpa 테스트")
     fun jpaTest(): List<TestMst>? = service.jpaTest()
 
+    @GetMapping("/dsl")
+    @ApiOperation("Dsl 테스트")
+    fun dslTest(): List<TestMst>? = service.queryDslTest()
+
     @PostMapping
     @ApiOperation("포스트 로깅 테스트 API")
     fun postTest(@RequestBody input: GetTestOut): GetTestOut {

@@ -34,13 +34,14 @@ class SwaggerConfig {
     @Bean
     fun api(): Docket {
         log.info("Swagger Config Start")
+        val res = Docket(DocumentationType.OAS_30)
+                    .select()
+                    .apis(RequestHandlerSelectors.basePackage("kr.co.osj4532"))
+                    .paths(PathSelectors.any())
+                    .build()
+                    .pathMapping("/")
+                    .apiInfo(apiInfo())
         log.info("Swagger Config End")
-        return Docket(DocumentationType.OAS_30)
-            .select()
-            .apis(RequestHandlerSelectors.basePackage("kr.co.osj4532"))
-            .paths(PathSelectors.any())
-            .build()
-            .pathMapping("/")
-            .apiInfo(apiInfo())
+        return res
     }
 }
