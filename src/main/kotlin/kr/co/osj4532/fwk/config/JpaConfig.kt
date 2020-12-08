@@ -37,7 +37,11 @@ class JpaConfig {
         val properties = hashMapOf<String, Any>()
         properties["hibernate.default_schema"] = "query_study"
         properties["hibernate.physical_naming_strategy"] = "org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy"
-        properties["hibernate.show_sql"] = true
+        // 201208 | osj4532 | show_sql 은 System.out을 사용하기 때문에 성능이 좋지 않다.
+        // application.yml 에서 로깅 관련 설정 추가
+        //properties["hibernate.show_sql"] = true
+        properties["hibernate.format_sql"] = true
+        properties["use_sql_comments"] = true
         properties["hibernate.dialect"] = "org.hibernate.dialect.MySQL5InnoDBDialect"
         properties["hibernate.ddl-auto"] = "none"
         properties["hibernate.hbm2ddl.auto"] = "none"

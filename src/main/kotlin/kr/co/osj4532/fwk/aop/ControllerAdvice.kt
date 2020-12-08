@@ -65,6 +65,8 @@ class ControllerAdvice {
 
             var body = IOUtils.toString(request.inputStream, Charset.forName("UTF-8"))
             body = body.replace("\n", "")
+            body = if(body.isNullOrEmpty()) null
+                   else body
             log.info("body :  $body")
             log.info("referer :  ${request.getHeader("referer")}")
             log.info(">>>>> controller start [$controllerName()]")
