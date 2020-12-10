@@ -31,7 +31,10 @@ class HttpRequestWrapper(request: HttpServletRequest) : HttpServletRequestWrappe
     }
 
     override fun getHeader(name: String): String? {
-        return headerMap[name]
+        return if (headerMap.containsKey(name))
+            headerMap[name]
+        else
+            super.getHeader(name)
     }
 
     override fun getHeaderNames(): Enumeration<String> {

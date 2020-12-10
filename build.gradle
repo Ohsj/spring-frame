@@ -61,6 +61,9 @@ dependencies {
     implementation "javax.inject:javax.inject:1"
     kapt "com.querydsl:querydsl-apt::jpa"
 
+    // pdf
+    implementation "org.jsoup:jsoup:1.9.1"
+    implementation "org.xhtmlrenderer:flying-saucer-pdf-openpdf:9.1.20"
 
     // etc
     implementation "commons-io:commons-io:2.8.0"
