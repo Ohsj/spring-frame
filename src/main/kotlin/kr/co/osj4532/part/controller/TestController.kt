@@ -7,6 +7,8 @@ import kr.co.osj4532.part.service.TestService
 import kr.co.osj4532.model.entity.TestMst
 import kr.co.osj4532.part.dto.GetTestOut
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.core.io.Resource
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 /**
@@ -40,6 +42,14 @@ class TestController : BaseController() {
     @GetMapping("/dsl")
     @ApiOperation("Dsl 테스트")
     fun dslTest(): List<TestMst>? = service.queryDslTest()
+
+    @GetMapping("/pdf")
+    @ApiOperation("pdf 테스트")
+    fun pdfTest(): ResponseEntity<Resource>? = service.getPdfTest()
+
+    @GetMapping("/pdf-merge")
+    @ApiOperation("pdf merge 테스트")
+    fun pdfMergeTest(): ResponseEntity<Resource>? = service.getPdfMergeTest()
 
     @PostMapping
     @ApiOperation("포스트 로깅 테스트 API")

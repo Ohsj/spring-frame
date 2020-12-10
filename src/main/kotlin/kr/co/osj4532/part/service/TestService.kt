@@ -9,6 +9,10 @@ import kr.co.osj4532.repo.jpa.TestMstRepo
 import kr.co.osj4532.repo.mybatis.TestMapper
 import kr.co.osj4532.repo.mybatis.TestMapper2
 import kr.co.osj4532.repo.querydsl.QTestMstRepo
+import kr.co.osj4532.util.DownloadUtils
+import kr.co.osj4532.util.PdfUtils
+import org.springframework.core.io.Resource
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 /**
@@ -22,6 +26,8 @@ class TestService(
         val testRepo: TestMstRepo,
         val qTestMstRepo: QTestMstRepo
 ): BaseService() {
+
+    val htmlFilePath = "classpath:pdf/test.html"
 
     fun mapperTest(): List<GetTestOut> {
         return mapper.selectTest()
@@ -37,5 +43,21 @@ class TestService(
 
     fun queryDslTest(): List<TestMst>? {
         return qTestMstRepo.selectAllTest()
+    }
+
+    fun getPdfTest(): ResponseEntity<Resource>? {
+        val byteArray = PdfUtils.makePdfOne(htmlFilePath)
+        return if (byteArray != null) DownloadUtils.download(byteArray, "test.pdf")
+               else null
+    }
+
+    fun getPdfMergeTest() : ResponseEntity<Resource>? {
+        val list = mutableListOf<ByteArray?>()
+        for (i in 0..2) {
+            list.add(PdfUtils.makePdfOne(htmlFilePath))
+        }
+        val mergedPdf = PdfUtils.mergePdfToByteArray(list)
+        return if (mergedPdf != null) DownloadUtils.download(mergedPdf, "merge.pdf")
+               else null
     }
 }
