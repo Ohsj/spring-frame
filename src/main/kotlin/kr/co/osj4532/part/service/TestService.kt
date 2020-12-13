@@ -46,7 +46,7 @@ class TestService(
     }
 
     fun getPdfTest(): ResponseEntity<Resource>? {
-        val byteArray = PdfUtils.makePdfOne(htmlFilePath)
+        val byteArray = PdfUtils.generatePdf(htmlFilePath)
         return if (byteArray != null) DownloadUtils.download(byteArray, "test.pdf")
                else null
     }
@@ -54,9 +54,9 @@ class TestService(
     fun getPdfMergeTest() : ResponseEntity<Resource>? {
         val list = mutableListOf<ByteArray?>()
         for (i in 0..2) {
-            list.add(PdfUtils.makePdfOne(htmlFilePath))
+            list.add(PdfUtils.generatePdf(htmlFilePath))
         }
-        val mergedPdf = PdfUtils.mergePdfToByteArray(list)
+        val mergedPdf = PdfUtils.generateMergePdf(list)
         return if (mergedPdf != null) DownloadUtils.download(mergedPdf, "merge.pdf")
                else null
     }

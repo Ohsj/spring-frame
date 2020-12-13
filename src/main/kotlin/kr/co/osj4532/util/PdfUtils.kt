@@ -4,46 +4,67 @@ import com.lowagie.text.DocumentException
 import com.lowagie.text.pdf.PdfCopy
 import com.lowagie.text.pdf.PdfImportedPage
 import com.lowagie.text.pdf.PdfReader
+import kr.co.osj4532.kr.co.osj4532.util.DateUtils
+import kr.co.osj4532.part.dto.GetPdfUtilOut
 import org.apache.commons.io.FileUtils
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.springframework.stereotype.Component
 import org.springframework.util.ResourceUtils
 import org.xhtmlrenderer.pdf.ITextRenderer
-import java.io.*
-import kotlin.jvm.Throws
+import java.io.BufferedOutputStream
+import java.io.File
+import java.io.IOException
+import java.util.*
 
 /**
  * 201210 | osj4532 | created
+ * 201213 | osj4532 | delete temp file function add
  */
 @Component
 class PdfUtils {
     companion object {
-
-        @Throws(FileNotFoundException::class)
-        fun makePdfOne(htmlFilePath: String): ByteArray? {
-            val file = ResourceUtils.getFile(htmlFilePath)
-            return makePdfOne(file)
+        @Throws(IOException::class)
+        fun generatePdf(htmlPath: String): ByteArray? {
+            val result = makePdfOne(ResourceUtils.getFile(htmlPath))
+            if (result != null) {
+                deleteFile(result.fileName)
+                return result.pdf
+            }
+            return null
         }
 
         @Throws(IOException::class)
-        fun makePdfOne(htmlFile: File): ByteArray? {
+        fun generatePdf(htmlFile: File): ByteArray? {
+            val result = makePdfOne(htmlFile)
+            if (result != null) {
+                deleteFile(result.fileName)
+                return result.pdf
+            }
+            return null
+        }
+        @Throws(IOException::class)
+        fun generateMergePdf(byteArrayList: List<ByteArray?>): ByteArray? {
+            val result = mergePdf(byteArrayList)
+            if (result != null) {
+                deleteFile(result.fileName)
+                return result.pdf
+            }
+            return null
+        }
+
+        @Throws(IOException::class)
+        private fun makePdfOne(htmlFile: File): GetPdfUtilOut? {
             val htmlString = Jsoup.parse(htmlFile, "UTF-8").html()
             val xhtml = htmlToXhtml(htmlString)
-            return if (xhtml.isNotEmpty()) xhtmlToPdfByteArray(xhtml)
-                   else null
-        }
-
-        @Throws(IOException::class)
-        fun mergePdfToByteArray(byteArrayList: List<ByteArray?>): ByteArray? {
-            val file = mergePdfToFile(byteArrayList)
-            return if (file != null) FileUtils.readFileToByteArray(file)
+            return if (xhtml.isNotEmpty()) xhtmlToPdf(xhtml)
                    else null
         }
 
         @Throws(DocumentException::class, IOException::class)
-        fun mergePdfToFile(byteArrayList: List<ByteArray?>): File? {
-            val file = File("merge")
+        fun mergePdf(byteArrayList: List<ByteArray?>): GetPdfUtilOut? {
+            val fileName = "${DateUtils.getCurrentDate()}-mergePdf"
+            val file = File(fileName)
             val doc = com.lowagie.text.Document()
             val copy = PdfCopy(doc, file.outputStream())
             doc.open()
@@ -65,7 +86,11 @@ class PdfUtils {
             copy.close()
             doc.close()
 
-            return if (file.isFile && file.canRead() && file.length() > 0) file
+            return if (file.isFile && file.canRead() && file.length() > 0)
+                    GetPdfUtilOut(
+                        fileName = fileName,
+                        pdf = FileUtils.readFileToByteArray(file)
+                    )
                    else null
         }
 
@@ -77,15 +102,9 @@ class PdfUtils {
         }
 
         @Throws(IOException::class)
-        private fun xhtmlToPdfByteArray(xhtml: String): ByteArray? {
-            val file = xhtmlToPdfFile(xhtml)
-            return if (file != null) FileUtils.readFileToByteArray(file)
-                   else null
-        }
-
-        @Throws(IOException::class)
-        private fun xhtmlToPdfFile(xhtml: String): File? {
-            val file = File("pdf")
+        private fun xhtmlToPdf(xhtml: String): GetPdfUtilOut? {
+            val fileName = "${DateUtils.getCurrentDate()}-pdf"
+            val file = File(fileName)
             val renderer = ITextRenderer()
             renderer.setDocumentFromString(xhtml)
             renderer.layout()
@@ -93,8 +112,22 @@ class PdfUtils {
             val os = BufferedOutputStream(file.outputStream())
             renderer.createPDF(os)
 
-            return if (file.isFile && file.canRead() && file.length() > 0) file
+            return if (file.isFile && file.canRead() && file.length() > 0)
+                    GetPdfUtilOut(
+                        fileName = fileName,
+                        pdf = FileUtils.readFileToByteArray(file)
+                    )
                    else null
+        }
+
+        @Throws(IOException::class)
+        private fun deleteFile(fileName: String?) {
+            if (!fileName.isNullOrEmpty()) {
+                val file = File(fileName)
+                if (file.isFile && file.canRead() && file.exists()) {
+                    file.delete()
+                }
+            }
         }
     }
 }
