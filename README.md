@@ -6,6 +6,7 @@ spring frame 관련 공부 하기 위한 프로젝트입니다.
 ## 목차
 1. Dev Env
 2. Directory Structure
+3. License
 ---
 ## 1. Dev Env
 
@@ -40,3 +41,8 @@ src                          소스 루트
   L resources                       L 리소스 루트
     L mybatis                         L mybatis 메퍼 영역
 ```
+---
+## 3. License
+
+- [flying-saucer-pdf-openpdf](https://github.com/flyingsaucerproject/flyingsaucer)
+    - [LGPL](https://github.com/flyingsaucerproject/flyingsaucer/blob/master/LICENSE-LGPL-3.txt)
