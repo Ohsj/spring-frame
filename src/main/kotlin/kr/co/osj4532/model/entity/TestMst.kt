@@ -1,5 +1,6 @@
 package kr.co.osj4532.model.entity
 
+import java.io.Serializable
 import javax.persistence.Entity
 import javax.persistence.Id
 
@@ -9,4 +10,4 @@ data class TestMst (
         // GenerationType.IDENTITY 쓰기 지연 X
         val id: Long = 0,
         val name: String? = null
-)
+) : Serializable

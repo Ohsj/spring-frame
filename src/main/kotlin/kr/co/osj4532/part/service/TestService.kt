@@ -11,6 +11,7 @@ import kr.co.osj4532.repo.mybatis.TestMapper2
 import kr.co.osj4532.repo.querydsl.QTestMstRepo
 import kr.co.osj4532.util.DownloadUtils
 import kr.co.osj4532.util.PdfUtils
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.core.io.Resource
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
@@ -37,6 +38,7 @@ class TestService(
         return mapper2.selectTest()
     }
 
+    @Cacheable(value = ["testCache"], key = "1")
     fun jpaTest(): List<TestMst>? {
         return testRepo.findAll()
     }
